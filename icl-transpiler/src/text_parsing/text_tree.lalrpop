@@ -1,0 +1,40 @@
+use std::str::FromStr;
+
+use super::ast::{Expr, Op, Stmt};
+
+grammar;
+
+pub Program: Vec<Stmt> = { Stmt* }
+
+Stmt: Stmt = {
+    "(" "var" <Name> ")" => Stmt::Define(<>),
+    "(" "=" <target:Name> <expr:Expr> ")" => Stmt::Assign(target, Box::new(expr)),
+    <Expr> => Stmt::ExprStmt(Box::new(<>))
+}
+
+Expr: Expr = {
+    "(" <op:BinaryOp> <first:Expr> <second:Expr> ")"
+    => Expr::Binary(op, Box::new(first), Box::new(second)),
+
+    "(" <caller:Name> <args:Expr*> ")"
+    => Expr::Call(caller, args),
+
+    <Name> => Expr::Variable(<>),
+
+    <Num> => Expr::Number(<>)
+}
+
+BinaryOp: Op = {
+    "+" => Op::Add,
+    "-" => Op::Sub,
+    "*" => Op::Mul,
+    "/" => Op::Div
+}
+
+Num: i64 = {
+    r"[0-9]+" => i64::from_str(<>).unwrap()
+}
+
+Name: String = {
+    r"[_a-zA-Z][_a-zA-Z0-9]*" => <>.to_string()
+}
