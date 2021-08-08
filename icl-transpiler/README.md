@@ -8,8 +8,8 @@ other two bytes may be used freely and are randomly generated in this transpiler
 ###Token list
 | Syntax element| code | argument format|
 | ----| ---- | ----|
-| left brace `(`| 0 | -|
-| right brace `)` | 1| - |
+| left parenthesis `(`| 0 | -|
+| right parenthesis `)` | 1| - |
 | plus `+` | 2 | - |
 | minus `-` | 3 | - |
 | multiply `*` | 4 | - |
