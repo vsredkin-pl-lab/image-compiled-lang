@@ -1,4 +1,4 @@
-#image compiled language
+# image compiled language
 (I saw this project in a dream)
 
 Imagine if instead of writing code you could draw it in MSPaint.
