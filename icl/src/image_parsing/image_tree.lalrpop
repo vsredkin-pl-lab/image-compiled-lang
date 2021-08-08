@@ -1,0 +1,55 @@
+
+grammar;
+
+use super::ast::{Expr, Op, Stmt};
+use super::token::{self, Token, LexicalError};
+
+
+
+extern {
+    type Location = usize;
+    type Error = LexicalError;
+
+    enum token::Token {
+        "(" => Token::LParen,
+        ")" => Token::RParen,
+
+        "+" => Token::Plus,
+        "-" => Token::Minus,
+        "*" => Token::Star,
+        "/" => Token::Slash,
+
+        Name => Token::Name(<usize>),
+        Print => Token::Print,
+        Num => Token::Num(<i64>),
+        Assign => Token::Assign(<usize>),
+        Define => Token::Define(<usize>),
+    }
+}
+
+
+
+pub Program: Vec<Stmt> = { Stmt* }
+
+Stmt: Stmt = {
+    "(" <def:Define> ")" => Stmt::Define(def),
+    "(" <target:Assign> <expr:Expr> ")" => Stmt::Assign(target, Box::new(expr)),
+    "(" Print <expr:Expr> ")" => Stmt::PrintStmt(Box::new(<>))
+}
+
+Expr: Expr = {
+    "(" <op:BinaryOp> <first:Expr> <second:Expr> ")"
+    => Expr::Binary(op, Box::new(first), Box::new(second)),
+
+    <Name> => Expr::Variable(<>),
+
+    <Num> => Expr::Number(<>)
+}
+
+BinaryOp: Op = {
+    "+" => Op::Add,
+    "-" => Op::Sub,
+    "*" => Op::Mul,
+    "/" => Op::Div
+}
+

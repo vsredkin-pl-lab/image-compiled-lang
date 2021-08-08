@@ -1,16 +1,17 @@
 use std::ops::AddAssign;
-
+#[derive(Debug)]
 pub enum Opcode {
     Load(u8),
+    LoadConst(u8),
     LoadImmediate(i8),
     Store(u8),
     Add, Sub, Mul, Div,
     Print
 }
-
+#[derive(Debug)]
 pub struct Chunk {
-    code: Vec<Opcode>,
-    constants: Vec<i64>
+    pub code: Vec<Opcode>,
+    pub constants: Vec<i64>
 }
 
 impl Chunk{
