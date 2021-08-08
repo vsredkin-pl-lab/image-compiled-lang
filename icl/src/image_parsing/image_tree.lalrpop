@@ -2,13 +2,10 @@
 grammar;
 
 use super::ast::{Expr, Op, Stmt};
-use super::token::{self, Token, LexicalError};
-
-
+use super::token::{self, Token};
 
 extern {
     type Location = usize;
-    type Error = LexicalError;
 
     enum token::Token {
         "(" => Token::LParen,

@@ -1,5 +1,5 @@
 // auto-generated: "lalrpop 0.19.6"
-// sha3: e5602d739718ddc5497e7ad075ab35135b7d5d65bbe0571612704638e08521e4
+// sha3: b76cc27c1a63fd67f599a6bcb4de8ad28b437d233732236a6481eba547d1bd
 use super::ast::{Expr, Op, Stmt};
 use super::token::{self, Token, LexicalError};
 #[allow(unused_extern_crates)]
@@ -191,7 +191,7 @@ mod __parse__Program {
     where 
     {
         type Location = usize;
-        type Error = LexicalError;
+        type Error = &'static str;
         type Token = token::Token;
         type TokenIndex = usize;
         type Symbol = __Symbol<>;
@@ -336,7 +336,7 @@ mod __parse__Program {
         >(
             &self,
             __tokens0: __TOKENS,
-        ) -> Result<Vec<Stmt>, __lalrpop_util::ParseError<usize, token::Token, LexicalError>>
+        ) -> Result<Vec<Stmt>, __lalrpop_util::ParseError<usize, token::Token, &'static str>>
         {
             let __tokens = __tokens0.into_iter();
             let mut __tokens = __tokens.map(|t| __ToTriple::to_triple(t));
@@ -355,7 +355,7 @@ mod __parse__Program {
         __states: &mut alloc::vec::Vec<i8>,
         __symbols: &mut alloc::vec::Vec<(usize,__Symbol<>,usize)>,
         _: core::marker::PhantomData<()>,
-    ) -> Option<Result<Vec<Stmt>,__lalrpop_util::ParseError<usize, token::Token, LexicalError>>>
+    ) -> Option<Result<Vec<Stmt>,__lalrpop_util::ParseError<usize, token::Token, &'static str>>>
     {
         let (__pop_states, __nonterminal) = match __action {
             0 => {
@@ -943,16 +943,16 @@ fn __action17<
 }
 
 pub trait __ToTriple<> {
-    fn to_triple(value: Self) -> Result<(usize,token::Token,usize), __lalrpop_util::ParseError<usize, token::Token, LexicalError>>;
+    fn to_triple(value: Self) -> Result<(usize,token::Token,usize), __lalrpop_util::ParseError<usize, token::Token, &'static str>>;
 }
 
 impl<> __ToTriple<> for (usize, token::Token, usize) {
-    fn to_triple(value: Self) -> Result<(usize,token::Token,usize), __lalrpop_util::ParseError<usize, token::Token, LexicalError>> {
+    fn to_triple(value: Self) -> Result<(usize,token::Token,usize), __lalrpop_util::ParseError<usize, token::Token, &'static str>> {
         Ok(value)
     }
 }
-impl<> __ToTriple<> for Result<(usize, token::Token, usize), LexicalError> {
-    fn to_triple(value: Self) -> Result<(usize,token::Token,usize), __lalrpop_util::ParseError<usize, token::Token, LexicalError>> {
+impl<> __ToTriple<> for Result<(usize, token::Token, usize), &'static str> {
+    fn to_triple(value: Self) -> Result<(usize,token::Token,usize), __lalrpop_util::ParseError<usize, token::Token, &'static str>> {
         match value {
             Ok(v) => Ok(v),
             Err(error) => Err(__lalrpop_util::ParseError::User { error }),

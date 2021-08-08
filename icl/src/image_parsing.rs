@@ -22,5 +22,5 @@ pub fn parse_image_file(filename: &str) -> Result<Program, String> {
     let parser = image_tree::ProgramParser::new();
     let tokens = token::tokenize(buffer);
     parser.parse(tokens)
-        .or(Err("error parsing image grammar".to_string()))
+        .map_err(|e| {format!("error {:?}", e)})
 }
